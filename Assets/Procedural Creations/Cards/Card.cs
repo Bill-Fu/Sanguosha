@@ -479,10 +479,14 @@ public class Card : MonoBehaviour
 		
 		float x = Stock.Size.x*Stock.Scale/2;
 		float y = Stock.Size.y*Stock.Scale/2;
-		
-		float bx = Mathf.Max(Stock.CornerSize,Stock.Border.x)*Stock.Scale;
-		float by = Mathf.Max(Stock.CornerSize,Stock.Border.y)*Stock.Scale;
-		
+
+        //改这里了，尝试将边框去掉
+        //这里这么改动其实没什么科学道理……纯粹是因为改完之后卡片样子比较好看接近我们需要的效果
+        float bx = -Mathf.Max(Stock.CornerSize,Stock.Border.x)*Stock.Scale;
+        float by = -Mathf.Max(Stock.CornerSize,Stock.Border.y)*Stock.Scale;
+        //float bx = 0;
+        //float by = 0;
+
 		//float cx = x-bx;
 		//float cy = y-by;
 		

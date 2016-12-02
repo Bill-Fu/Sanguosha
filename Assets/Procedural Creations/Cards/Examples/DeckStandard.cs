@@ -32,7 +32,8 @@ public class DeckStandard : CardDeck
 			defs.Add( new CardDef(Atlas,Stock,"10",symbol,10) );
 			string prefix = prefixes[i];
 			CardDef jj = new CardDef(Atlas,Stock,"J",symbol,0);
-			jj.Image = prefix+"Jack";
+            jj.Image = prefix+"Jack";
+            //jj.Image = "Jiben-Sha";
 			defs.Add(jj);
 			CardDef qq = new CardDef(Atlas,Stock,"Q",symbol,0);
 			qq.Image = prefix+"Queen";

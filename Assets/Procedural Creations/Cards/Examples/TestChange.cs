@@ -41,9 +41,9 @@ public class TestChange : MonoBehaviour {
                     newCard.Definition.Pattern = 4;
                     break;
                 case 3:
-                    newCard.Definition.Text = "A";
+                    newCard.Definition.Text = "J";
                     newCard.Definition.Symbol = "Spade";
-                    newCard.Definition.Pattern = 1;
+                    newCard.Definition.Pattern = 0;
                     break;
             }
 
