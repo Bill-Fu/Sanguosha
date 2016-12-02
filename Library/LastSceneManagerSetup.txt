@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Procedural Creations/Cards/Examples/Blackjack.unity
+  isLoaded: 1
+  isActive: 1
