@@ -13,8 +13,9 @@ public class CardStock : MonoBehaviour
 	public float Scale = 1.0f;
 	// Size of card
 	public Vector2 Size = new Vector2(1,1.5f);
-	// Corner = part of Size reserved for corners
-	public float CornerSize = 0.15f;
+    // Corner = part of Size reserved for corners
+    ////public float CornerSize = 0.15f;
+    public float CornerSize = 0f;
 	// Border = part of Size reserved for symbols etc.
 	public Vector2 Border = new Vector2(0.1f,0.1f);
 	public Vector2 BackBorder = new Vector2(0.1f,0.1f);
@@ -25,7 +26,8 @@ public class CardStock : MonoBehaviour
 	// Size of symbols
 	public float SymbolSize = 0.125f; // normal pips
 	public float BigSymbolSize = 0.4f; // large Ace center pip
-	public float CornerSymbolSize = 0.06f; // corner
+    ////public float CornerSymbolSize = 0.06f; // corner
+    public float CornerSymbolSize = 0f;
 	// Basic material used for all generated meshes.
 	public Material DefaultMaterial;
 	
@@ -60,7 +62,7 @@ public class CardStock : MonoBehaviour
 		}
 		if (CornerSize < 0.01f*Mathf.Max(Size.x,Size.y))
 		{
-			Smooth = 0;
+			//Smooth = 0;
 		}
 		if (string.IsNullOrEmpty(Paper))
 		{

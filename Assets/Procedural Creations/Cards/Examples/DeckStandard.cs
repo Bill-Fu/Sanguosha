@@ -16,6 +16,7 @@ public class DeckStandard : CardDeck
 		string [] suits = new string[]{"Heart","Spade","Diamond","Club"};
 		string [] prefixes = new string[]{"H-","S-","D-","C-"};
 		List<CardDef> defs = new List<CardDef>();
+        //开始导入卡牌
 		for (int i=0; i<4; ++i)
 		{
 			//int ii = i*13;
@@ -33,6 +34,7 @@ public class DeckStandard : CardDeck
 			string prefix = prefixes[i];
 			CardDef jj = new CardDef(Atlas,Stock,"J",symbol,0);
             jj.Image = prefix+"Jack";
+            jj.FullImage = true;
             //jj.Image = "Jiben-Sha";
 			defs.Add(jj);
 			CardDef qq = new CardDef(Atlas,Stock,"Q",symbol,0);
