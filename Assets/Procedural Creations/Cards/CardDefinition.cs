@@ -19,19 +19,19 @@ public class CardDef
     //后面是我们三国杀游戏用到的变量
 	public string Image;
 	public bool FullImage;
-    //public string CardName;
+    public string CardName;
     //TODO
     /*
     * CardName：卡牌名称
     * 
     */
-    //public int Dianshu;
+    public int Dianshu;
     /*
      * Dianshu:卡牌点数，可能用于拼点，不过对于标准版本似乎没什么太大的用处
      * 点数范围：1-13
      */
     
-    //public string Huase;
+    public string Huase;
     /*
      * Huase：卡牌花色，周瑜之类的可能会用到
      * 方块：Fangkuai
@@ -40,7 +40,7 @@ public class CardDef
      * 黑桃：Heitao
      */
     
-    //public string Classification;
+    public string Classification;
     /*
      * Classification:卡牌的分类
      * 卡牌共分为四种：身份牌、体力牌、武将牌和游戏牌。
@@ -49,7 +49,7 @@ public class CardDef
      * 武将牌："Wujiang"
      * 游戏牌："Youxi"  
      */
-    //public string Function;
+    public string Function;
     /*
      * Function:游戏牌的功能
      * 游戏牌可分为三种：基本牌、非延时锦囊牌、延时锦囊牌、装备牌
@@ -58,7 +58,7 @@ public class CardDef
      * 延时锦囊牌："Yanshijinnang"
      * 装备牌："Zhuangbei"
      */
-    //public string Country;
+    public string Country;
     /*
      * Country:武将牌的国籍
      * 魏国："Wei"
@@ -66,15 +66,15 @@ public class CardDef
      * 吴国："Wu"
      * 群雄："Qun"
      */
-    //public int Xueliang;
+    public int Xueliang;
     /*
      * Xueliang:武将的血量上限
      * 
      */
-    //public string Jineng_1;
-    //public string Jineng_2;
-    //public string Jineng_3;
-    //public string Jineng_4;
+    public string Jineng_1;
+    public string Jineng_2;
+    public string Jineng_3;
+    public string Jineng_4;
     /*
      * Jineng:武将技能，从目前来看的话上限只有四个技能，未来可以再扩展
      * --------------------------魏国武将-----------------------------
@@ -160,16 +160,19 @@ public class CardDef
 
     //我们自己开发的时候都使用这个卡牌定义
     //游戏牌初始化定义
-    /*
-    public CardDef(CardAtlas atlas, CardStock stock, string cardname,int dianshu, string huase,string classification,string function)
+    
+    public CardDef(CardAtlas atlas, CardStock stock, string image, string cardname, int dianshu, string huase, string classification, string function)
     {
         Atlas = atlas;
         Stock = stock;
+        Image = image;
         CardName = cardname;
         Dianshu = dianshu;
         Huase = huase;
         Classification = classification;
         Function = function;
+        //直接默认用full image
+        FullImage = true;
     }
-    */
+    
 }

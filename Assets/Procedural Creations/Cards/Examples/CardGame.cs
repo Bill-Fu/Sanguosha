@@ -32,8 +32,10 @@ public class CardGame : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+        //设置全屏
+        //Screen.SetResolution(1366, 768, true);
         //设置初始状态
-		m_state = GameState.Invalid;
+        m_state = GameState.Invalid;
         //？？？Deck的意思应该就是卡牌的意思，但是这个初始化函数好像什么都没干
 		Deck.Initialize();
         //获取找到三个Text的对象
