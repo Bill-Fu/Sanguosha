@@ -71,6 +71,7 @@ public class CardDef
      * Xueliang:武将的血量上限
      * 
      */
+    public string Sex;
     public string Jineng_1;
     public string Jineng_2;
     public string Jineng_3;
@@ -95,7 +96,7 @@ public class CardDef
      *      遗计："Yiji"
      * 甄姬：
      *      倾国："Qingguo"
-     *      洛神："Qingguo"
+     *      洛神："Luoshen"
      * --------------------------蜀国武将------------------------------
      * 刘备：
      *      仁德："Rende"
@@ -174,5 +175,22 @@ public class CardDef
         //直接默认用full image
         FullImage = true;
     }
-    
+
+    public CardDef(CardAtlas atlas, CardStock stock, string image, string cardname,string country,int xueliang,string sex,string jineng1,string jineng2,string jineng3,string jineng4)
+    {
+        Atlas = atlas;
+        Stock = stock;
+        Image = image;
+        CardName = cardname;
+        Country = country;
+        Xueliang = xueliang;
+        Sex = sex;
+        Jineng_1 = jineng1;
+        Jineng_2 = jineng2;
+        Jineng_3 = jineng3;
+        Jineng_4 = jineng4;
+        //直接默认用full image
+        FullImage = true;
+    }
+
 }

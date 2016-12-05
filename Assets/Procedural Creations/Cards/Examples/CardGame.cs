@@ -33,10 +33,10 @@ public class CardGame : MonoBehaviour
 	void Start ()
 	{
         //设置全屏
-        //Screen.SetResolution(1366, 768, true);
+        Screen.SetResolution(1366, 768, false);
         //设置初始状态
         m_state = GameState.Invalid;
-        //？？？Deck的意思应该就是卡牌的意思，但是这个初始化函数好像什么都没干
+        //Deck的意思应该就是卡牌的意思，但是这个初始化函数好像什么都没干
 		Deck.Initialize();
         //获取找到三个Text的对象
 		PlayerWins = this.transform.Find("MessagePlayerWins").gameObject;
@@ -95,17 +95,19 @@ public class CardGame : MonoBehaviour
     //就我的猜测这部分代码是想通过键盘控制按三个button
 	void Update ()
 	{
-		if (Input.GetKeyDown(KeyCode.F1))
+		if (Input.GetKeyDown(KeyCode.Q))
 		{
-			OnReset();
-		}
-		else if (Input.GetKeyDown(KeyCode.F2))
+            //OnReset();
+            Screen.SetResolution(1366, 768, false);
+        }
+		else if (Input.GetKeyDown(KeyCode.W))
 		{
-			OnHitMe();
-		}
+            //OnHitMe();
+            Screen.SetResolution(1366, 768, true);
+        }
 		else if (Input.GetKeyDown(KeyCode.F3))
 		{
-			OnStop();
+			//OnStop();
 		}
 		UpdateButtons();
 	}
@@ -145,8 +147,10 @@ public class CardGame : MonoBehaviour
 	
 	void HitDealer()
 	{
-        //从没用过的牌堆里取出一张牌
-		CardDef c1 = Deck.Pop();
+        //从没用过的游戏牌堆里取出一张牌
+		//CardDef c1 = Deck.Pop();
+        //尝试一下武将牌的效果
+        CardDef c1 = Deck.Wujiangpop();
 		if (c1 != null)
 		{
 			GameObject newObj = new GameObject();
@@ -251,7 +255,9 @@ public class CardGame : MonoBehaviour
 			ShowMessage("");
             //从新装满可用的牌
             Clear();
-            //洗牌
+            //洗武将牌
+            Deck.WujiangShuffle();
+            //洗游戏牌
 			Deck.Shuffle();
 			HitDealer();
 			yield return new WaitForSeconds(DealTime);
@@ -363,8 +369,16 @@ public class CardGame : MonoBehaviour
 			}
 		}
 	}
-	//这里的函数是提供给button外部调用的
-	public void OnButton(string msg)
+    //提供给测试功能的Test button调用
+    void OnTest()
+    {
+        Debug.Log("OnTest");
+        Vector3 deckPos = GetDeckPosition();
+        m_player[0].transform.position = deckPos;
+        
+    }
+    //这里的函数是提供给button外部调用的
+    public void OnButton(string msg)
 	{
 		Debug.Log("OnButton = "+msg);
 		switch (msg)
@@ -379,6 +393,9 @@ public class CardGame : MonoBehaviour
 		case "Stop":
 			StartCoroutine(OnStop());
 			break;
+        case "Test":
+            OnTest();
+            break;
 		}
 	}
 }

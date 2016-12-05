@@ -8,5 +8,5 @@ public class GameButton : MonoBehaviour
 	void OnMouseDown()
 	{
 		transform.parent.gameObject.GetComponent<CardGame>().OnButton(Message);
-	}
+    }
 }
