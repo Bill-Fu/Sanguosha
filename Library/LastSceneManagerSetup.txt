@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Procedural Creations/Cards/Examples/Blackjack.unity
+- path: Assets/Procedural Creations/Cards/Examples/Sanguosha.unity
   isLoaded: 1
   isActive: 1
