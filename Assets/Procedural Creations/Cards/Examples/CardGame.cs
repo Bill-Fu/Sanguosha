@@ -5,6 +5,11 @@ using System.Collections.Generic;
 
 public class CardGame : MonoBehaviour
 {
+    //体力最大值为4，目前规则下是这样子的
+    const int Tili_Max = 4;
+    const int Button_Max = 6;
+    const int Xuanjiang_Max = 3;
+
 	public CardDeck Deck;
 	//List<CardDefinition> m_deck = new List<CardDefinition>();
 	
@@ -29,6 +34,9 @@ public class CardGame : MonoBehaviour
 	};
 
     GameObject[] Buttons;
+
+    //已经发的武将牌的数量
+    int Wujiang_num;
 
     #region 三国杀游戏三层状态机定义
     /*
@@ -84,7 +92,9 @@ public class CardGame : MonoBehaviour
     Sanguosha_Stage game_stage;
     #endregion
 
-    #region 玩家手牌列表定义
+    #region 玩家手牌列表和选将框列表定义
+    //玩家选将列表武将卡牌
+    List<Card> Xuanjiang_Cards = new List<Card>();
     //玩家1手中持有的卡牌
     List<Card> Player1_Cards = new List<Card>();
     //玩家2手中持有的卡牌
@@ -108,14 +118,27 @@ public class CardGame : MonoBehaviour
     #endregion
 
     #region 定义静态文本Text
-    //玩家1装备区域
-    GameObject[] Sanguosha_Text_Player1_Zhuangbei;
     //玩家1判定区域
-    GameObject[] Sanguosha_Text_Player1_Panding;
-    //玩家2装备区域
-    GameObject[] Sanguosha_Text_Player2_Zhuangbei;
+    GameObject Sanguosha_Text_Player1_Panding1;
+    GameObject Sanguosha_Text_Player1_Panding2;
+    //玩家1装备区域
+    GameObject Sanguosha_Text_Player1_Zhuangbei1;
+    GameObject Sanguosha_Text_Player1_Zhuangbei2;
+    //玩家1手牌区域
+    GameObject Sanguosha_Text_Player1_Shoupai;
     //玩家2判定区域
-    GameObject[] Sanguosha_Text_Player2_Panding;
+    GameObject Sanguosha_Text_Player2_Panding1;
+    GameObject Sanguosha_Text_Player2_Panding2;
+    //玩家2装备区域
+    GameObject Sanguosha_Text_Player2_Zhuangbei1;
+    GameObject Sanguosha_Text_Player2_Zhuangbei2;
+    //玩家2手牌区域
+    GameObject Sanguosha_Text_Player2_Shoupai;
+    #endregion
+
+    #region 定义静态image
+    GameObject[] Sanguosha_Image_Player1_Tili;
+    GameObject[] Sanguosha_Image_Player2_Tili;
     #endregion
 
     // Use this for initialization
@@ -129,22 +152,78 @@ public class CardGame : MonoBehaviour
         game_round = Sanguosha_Round.Round_Invalid;
         game_stage = Sanguosha_Stage.Stage_Invalid;
         #endregion
-        
-        //删
-        m_state = GameState.Invalid;
-        //删
 
         //Deck的意思应该就是卡牌的意思，但是这个初始化函数好像什么都没干
+        //初始化牌堆信息
 		Deck.Initialize();
 
+        Wujiang_num = 0;
+
         #region 初始化存放静态按键的Sanguosha_Buttons数组
-        Sanguosha_Buttons = new GameObject[4];
+        Sanguosha_Buttons = new GameObject[Button_Max];
         Sanguosha_Buttons[0] = this.transform.Find("Restart").gameObject;
         Sanguosha_Buttons[1] = this.transform.Find("Queding").gameObject;
         Sanguosha_Buttons[2] = this.transform.Find("Quxiao").gameObject;
         Sanguosha_Buttons[3] = this.transform.Find("Jieshu").gameObject;
+        Sanguosha_Buttons[4] = this.transform.Find("Jineng1").gameObject;
+        Sanguosha_Buttons[5] = this.transform.Find("Jineng2").gameObject;
         #endregion
 
+        #region 初始化游戏中的文本对象
+        //玩家1区域的文本对象
+        Sanguosha_Text_Player1_Panding1 = this.transform.Find("Player1_Panding1").gameObject;
+        Sanguosha_Text_Player1_Panding2 = this.transform.Find("Player1_Panding2").gameObject;
+        Sanguosha_Text_Player1_Zhuangbei1 = this.transform.Find("Player1_Zhuangbei1").gameObject;
+        Sanguosha_Text_Player1_Zhuangbei2 = this.transform.Find("Player1_Zhuangbei2").gameObject;
+        Sanguosha_Text_Player1_Shoupai = this.transform.Find("Player1_Shoupai").gameObject;
+        //玩家2区域的文本对象
+        Sanguosha_Text_Player2_Panding1 = this.transform.Find("Player2_Panding1").gameObject;
+        Sanguosha_Text_Player2_Panding2 = this.transform.Find("Player2_Panding2").gameObject;
+        Sanguosha_Text_Player2_Zhuangbei1 = this.transform.Find("Player2_Zhuangbei1").gameObject;
+        Sanguosha_Text_Player2_Zhuangbei2 = this.transform.Find("Player2_Zhuangbei2").gameObject;
+        Sanguosha_Text_Player2_Shoupai = this.transform.Find("Player2_Shoupai").gameObject;
+        #endregion
+
+        #region 初始化游戏中的image对象
+        Sanguosha_Image_Player1_Tili = new GameObject[Tili_Max];
+        Sanguosha_Image_Player2_Tili = new GameObject[Tili_Max];
+        Sanguosha_Image_Player1_Tili[0] = this.transform.Find("Canvas/Player1_Tili_1").gameObject;
+        Sanguosha_Image_Player1_Tili[1] = this.transform.Find("Canvas/Player1_Tili_2").gameObject;
+        Sanguosha_Image_Player1_Tili[2] = this.transform.Find("Canvas/Player1_Tili_3").gameObject;
+        Sanguosha_Image_Player1_Tili[3] = this.transform.Find("Canvas/Player1_Tili_4").gameObject;
+        Sanguosha_Image_Player2_Tili[0] = this.transform.Find("Canvas/Player2_Tili_1").gameObject;
+        Sanguosha_Image_Player2_Tili[1] = this.transform.Find("Canvas/Player2_Tili_2").gameObject;
+        Sanguosha_Image_Player2_Tili[2] = this.transform.Find("Canvas/Player2_Tili_3").gameObject;
+        Sanguosha_Image_Player2_Tili[3] = this.transform.Find("Canvas/Player2_Tili_4").gameObject;
+        #endregion
+
+        #region 将除了重新开始游戏button以外的image，text和button全部设置为不可见
+        //所有text都不可见
+        Sanguosha_Text_Player1_Panding1.SetActive(false);
+        Sanguosha_Text_Player1_Panding2.SetActive(false);
+        Sanguosha_Text_Player1_Zhuangbei1.SetActive(false);
+        Sanguosha_Text_Player1_Zhuangbei2.SetActive(false);
+        Sanguosha_Text_Player1_Shoupai.SetActive(false);
+        Sanguosha_Text_Player2_Panding1.SetActive(false);
+        Sanguosha_Text_Player2_Panding2.SetActive(false);
+        Sanguosha_Text_Player2_Zhuangbei1.SetActive(false);
+        Sanguosha_Text_Player2_Zhuangbei2.SetActive(false);
+        Sanguosha_Text_Player2_Shoupai.SetActive(false);
+        //所有button都不可见
+        for(int i = 1; i < Sanguosha_Buttons.Length; ++i)
+        {
+            Sanguosha_Buttons[i].SetActive(false);
+        }
+        //所有image都不可见
+        for(int i = 0; i < Tili_Max; ++i)
+        {
+            Sanguosha_Image_Player1_Tili[i].SetActive(false);
+            Sanguosha_Image_Player2_Tili[i].SetActive(false);
+        }
+        #endregion
+
+        #region 要删除的之前游戏的代码
+        m_state = GameState.Invalid;
         //获取找到三个Text的对象
         PlayerWins = this.transform.Find("MessagePlayerWins").gameObject;
 		DealerWins = this.transform.Find("MessageDealerWins").gameObject;
@@ -153,24 +232,10 @@ public class CardGame : MonoBehaviour
 		PlayerWins.SetActive(false);
 		DealerWins.SetActive(false);
 		NobodyWins.SetActive(false);
-        //初始化存放按键的Buttons数组
-		Buttons = new GameObject[3];
-        //获取找到三个Button的对象
-		Buttons[0] = this.transform.Find("Button1").gameObject;
-		Buttons[1] = this.transform.Find("Button2").gameObject;
-		Buttons[2] = this.transform.Find("Button3").gameObject;
-        //这个函数是用来更新button的颜色和状态，大约是在每一次需要更新button状态的时候调用
-		UpdateButtons();
-	}
-	//更新三个button的颜色状态
-	void UpdateButtons()
-	{
-		Buttons[0].GetComponent<Renderer>().material.color = Color.blue;
-		Buttons[1].GetComponent<Renderer>().material.color = (m_state == GameState.Started) ? Color.blue : Color.red;
-		Buttons[2].GetComponent<Renderer>().material.color = (m_state == GameState.Started || m_state == GameState.PlayerBusted) ? Color.blue : Color.red;
-	}
-	//显示获胜方信息
-	void ShowMessage(string msg)
+        #endregion
+    }
+    //显示获胜方信息
+    void ShowMessage(string msg)
 	{
 		if (msg == "Dealer")
 		{
@@ -216,7 +281,6 @@ public class CardGame : MonoBehaviour
 		{
 			//OnStop();
 		}
-		UpdateButtons();
 	}
 	//shuffle的话应该是洗牌的函数
 	void Shuffle()
@@ -225,6 +289,26 @@ public class CardGame : MonoBehaviour
 		{
 		}
 	}
+    //仿照Clear()函数
+    void Sanguosha_Clear()
+    {
+        foreach(Card card in Player1_Cards)
+        {
+            GameObject.DestroyImmediate(card.gameObject);
+        }
+        foreach(Card card in Player2_Cards)
+        {
+            GameObject.DestroyImmediate(card.gameObject);
+        }
+        foreach(Card card in Xuanjiang_Cards)
+        {
+            GameObject.DestroyImmediate(card.gameObject);
+        }
+        Player1_Cards.Clear();
+        Player2_Cards.Clear();
+        Xuanjiang_Cards.Clear();
+        Deck.Reset();
+    }
 	//？？？清理卡牌函数
 	void Clear()
 	{
@@ -252,6 +336,31 @@ public class CardGame : MonoBehaviour
 	
 	const float FlyTime = 0.5f;
 	
+    void Xuanzewujiang()
+    {
+        CardDef tmpCard = Deck.Wujiangpop();
+        float x, y, z;
+
+        Debug.Log("Xuanzewujiang");
+        if (tmpCard != null)
+        {
+            GameObject newObj = new GameObject();
+            newObj.name = "Wujiang_Card";
+            Card newCard = newObj.AddComponent(typeof(Card)) as Card;
+            newCard.Definition = tmpCard;
+            newObj.transform.parent = Deck.transform;
+            newCard.TryBuild();
+            x = -3 + Wujiang_num * 3.0f;
+            y = 2;
+            z = 0;
+            Wujiang_num++;
+            Vector3 deckPos = GetDeckPosition();
+            newObj.transform.position = deckPos;
+            Xuanjiang_Cards.Add(newCard);
+            newCard.SetFlyTarget(deckPos, new Vector3(x, y, z), FlyTime);
+        }
+    }
+    
 	void HitDealer()
 	{
         //从没用过的游戏牌堆里取出一张牌
@@ -457,7 +566,6 @@ public class CardGame : MonoBehaviour
 		if (m_state == GameState.Started || m_state == GameState.PlayerBusted)
 		{
 			m_state = GameState.Resolving;
-			UpdateButtons();
 			int playerScore = GetPlayerScore();
 			while (true)
 			{
@@ -501,11 +609,64 @@ public class CardGame : MonoBehaviour
 
     }
     //这里的函数是提供给button外部调用的
+    
+    IEnumerator OnRestart()
+    {
+        if (game_state != Sanguosha_GameState.State_Resolving)
+        {
+            #region 还要进行一系列的状态的复位
+            game_state = Sanguosha_GameState.State_Resolving;
+            Wujiang_num = 0;
+            #region 将除了重新开始游戏button以外的image，text和button全部设置为不可见
+            //所有text都不可见
+            Sanguosha_Text_Player1_Panding1.SetActive(false);
+            Sanguosha_Text_Player1_Panding2.SetActive(false);
+            Sanguosha_Text_Player1_Zhuangbei1.SetActive(false);
+            Sanguosha_Text_Player1_Zhuangbei2.SetActive(false);
+            Sanguosha_Text_Player1_Shoupai.SetActive(false);
+            Sanguosha_Text_Player2_Panding1.SetActive(false);
+            Sanguosha_Text_Player2_Panding2.SetActive(false);
+            Sanguosha_Text_Player2_Zhuangbei1.SetActive(false);
+            Sanguosha_Text_Player2_Zhuangbei2.SetActive(false);
+            Sanguosha_Text_Player2_Shoupai.SetActive(false);
+            //所有button都不可见
+            for (int i = 1; i < Sanguosha_Buttons.Length; ++i)
+            {
+                Sanguosha_Buttons[i].SetActive(false);
+            }
+            //所有image都不可见
+            for (int i = 0; i < Tili_Max; ++i)
+            {
+                Sanguosha_Image_Player1_Tili[i].SetActive(false);
+                Sanguosha_Image_Player2_Tili[i].SetActive(false);
+            }
+            #endregion
+            #endregion
+            //从新装满卡牌堆
+            Sanguosha_Clear();
+            //洗武将牌
+            Deck.WujiangShuffle();
+            //洗游戏牌
+            Deck.Shuffle();
+            Xuanzewujiang();
+            yield return new WaitForSeconds(DealTime);
+            Xuanzewujiang();
+            yield return new WaitForSeconds(DealTime);
+            Xuanzewujiang();
+            yield return new WaitForSeconds(DealTime);
+            game_state = Sanguosha_GameState.State_ChooseWujiang;
+        }
+    }
+    
     public void OnButton(string msg)
 	{
 		Debug.Log("OnButton = "+msg);
 		switch (msg)
 		{
+            case "Restart":
+                StartCoroutine(OnRestart());
+                break;
+            /*
 		case "Reset":
                 //StartCoroutine()类似于开一个线程来进行这个函数
 			StartCoroutine(OnReset());
@@ -519,6 +680,8 @@ public class CardGame : MonoBehaviour
         case "Test":
             OnTest();
             break;
+            */
+
 		}
 	}
 }
