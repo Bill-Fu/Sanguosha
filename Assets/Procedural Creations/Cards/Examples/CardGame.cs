@@ -10,28 +10,28 @@ public class CardGame : MonoBehaviour
     const int Button_Max = 6;
     const int Xuanjiang_Max = 3;
 
-	public CardDeck Deck;
-	//List<CardDefinition> m_deck = new List<CardDefinition>();
-	
-	List<Card> m_dealer = new List<Card>();
-	List<Card> m_player = new List<Card>();
+    public CardDeck Deck;
+    //List<CardDefinition> m_deck = new List<CardDefinition>();
+
+    List<Card> m_dealer = new List<Card>();
+    List<Card> m_player = new List<Card>();
 
     GameState m_state;
 
     GameObject PlayerWins;
-	GameObject DealerWins;
-	GameObject NobodyWins;
-	
-	enum GameState
-	{
-		Invalid,
-		Started,
-		PlayerBusted,
-		Resolving,
-		DealerWins,
-		PlayerWins,
-		NobodyWins,
-	};
+    GameObject DealerWins;
+    GameObject NobodyWins;
+
+    enum GameState
+    {
+        Invalid,
+        Started,
+        PlayerBusted,
+        Resolving,
+        DealerWins,
+        PlayerWins,
+        NobodyWins,
+    };
 
     GameObject[] Buttons;
 
@@ -115,6 +115,8 @@ public class CardGame : MonoBehaviour
 
     #region 定义静态Button
     GameObject[] Sanguosha_Buttons;
+    GameObject[] Sanguosha_Xuanjiang;
+    GameObject[] Sanguosha_Shoupai;
     #endregion
 
     #region 定义静态文本Text
@@ -169,6 +171,13 @@ public class CardGame : MonoBehaviour
         Sanguosha_Buttons[5] = this.transform.Find("Jineng2").gameObject;
         #endregion
 
+        #region 初始化存放选将按钮的Sanguosha_Xuanjiang数组
+        Sanguosha_Xuanjiang = new GameObject[Xuanjiang_Max];
+        Sanguosha_Xuanjiang[0] = this.transform.Find("Wujiang1").gameObject;
+        Sanguosha_Xuanjiang[1] = this.transform.Find("Wujiang2").gameObject;
+        Sanguosha_Xuanjiang[2] = this.transform.Find("Wujiang3").gameObject;
+        #endregion
+
         #region 初始化游戏中的文本对象
         //玩家1区域的文本对象
         Sanguosha_Text_Player1_Panding1 = this.transform.Find("Player1_Panding1").gameObject;
@@ -197,8 +206,8 @@ public class CardGame : MonoBehaviour
         Sanguosha_Image_Player2_Tili[3] = this.transform.Find("Canvas/Player2_Tili_4").gameObject;
         #endregion
 
-        #region 将除了重新开始游戏button以外的image，text和button全部设置为不可见
-        //所有text都不可见
+        #region 将除了重新开始游戏button以外的image，text和button全部设置为不启用
+        //所有text都不启用
         Sanguosha_Text_Player1_Panding1.SetActive(false);
         Sanguosha_Text_Player1_Panding2.SetActive(false);
         Sanguosha_Text_Player1_Zhuangbei1.SetActive(false);
@@ -209,16 +218,21 @@ public class CardGame : MonoBehaviour
         Sanguosha_Text_Player2_Zhuangbei1.SetActive(false);
         Sanguosha_Text_Player2_Zhuangbei2.SetActive(false);
         Sanguosha_Text_Player2_Shoupai.SetActive(false);
-        //所有button都不可见
+        //所有功能button都不启用
         for(int i = 1; i < Sanguosha_Buttons.Length; ++i)
         {
             Sanguosha_Buttons[i].SetActive(false);
         }
-        //所有image都不可见
+        //所有image都不启用
         for(int i = 0; i < Tili_Max; ++i)
         {
             Sanguosha_Image_Player1_Tili[i].SetActive(false);
             Sanguosha_Image_Player2_Tili[i].SetActive(false);
+        }
+        //三个选将框设置为不启用
+        for(int i = 0; i < Xuanjiang_Max; ++i)
+        {
+            Sanguosha_Xuanjiang[i].SetActive(false);
         }
         #endregion
 
@@ -360,8 +374,33 @@ public class CardGame : MonoBehaviour
             newCard.SetFlyTarget(deckPos, new Vector3(x, y, z), FlyTime);
         }
     }
-    
-	void HitDealer()
+
+    //电脑选择武将的话就随机一个就好了
+    void Diannao_Xuanjiang()
+    {
+        CardDef tmpCard = Deck.Wujiangpop();
+        float x, y, z;
+
+        Debug.Log("Diannao Xuanjiang");
+        if (tmpCard != null)
+        {
+            GameObject newObj = new GameObject();
+            newObj.name = "Diannao_Wujiang";
+            Card newCard = newObj.AddComponent(typeof(Card)) as Card;
+            newCard.Definition = tmpCard;
+            newObj.transform.parent = Deck.transform;
+            newCard.TryBuild();
+            x = 0;
+            y = 5.5f;
+            z = 0;
+            Vector3 deckPos = GetDeckPosition();
+            newObj.transform.position = deckPos;
+            Xuanjiang_Cards.Add(newCard);
+            newCard.SetFlyTarget(deckPos, new Vector3(x, y, z), FlyTime);
+        }
+    }
+
+    void HitDealer()
 	{
         //从没用过的游戏牌堆里取出一张牌
 		CardDef c1 = Deck.Pop();
@@ -648,12 +687,18 @@ public class CardGame : MonoBehaviour
             Deck.WujiangShuffle();
             //洗游戏牌
             Deck.Shuffle();
+            //发三个武将
             Xuanzewujiang();
             yield return new WaitForSeconds(DealTime);
             Xuanzewujiang();
             yield return new WaitForSeconds(DealTime);
             Xuanzewujiang();
             yield return new WaitForSeconds(DealTime);
+            //把选择武将的button显示出来
+            for(int i = 0; i < Xuanjiang_Max; ++i)
+            {
+                Sanguosha_Xuanjiang[i].SetActive(true);
+            }
             game_state = Sanguosha_GameState.State_ChooseWujiang;
         }
     }
@@ -666,22 +711,93 @@ public class CardGame : MonoBehaviour
             case "Restart":
                 StartCoroutine(OnRestart());
                 break;
-            /*
-		case "Reset":
-                //StartCoroutine()类似于开一个线程来进行这个函数
-			StartCoroutine(OnReset());
-			break;
-		case "Hit":
-			OnHitMe();
-			break;
-		case "Stop":
-			StartCoroutine(OnStop());
-			break;
-        case "Test":
-            OnTest();
-            break;
-            */
+            case "Wujiang1":
+            case "Wujiang2":
+            case "Wujiang3":
+                if (game_state == Sanguosha_GameState.State_ChooseWujiang)
+                {
+                    #region 玩家选择武将
+                    for (int i = 0; i < Xuanjiang_Max; ++i)
+                    {
+                        Sanguosha_Xuanjiang[i].SetActive(false);
+                    }
+                    Xuanjiang_Cards[0].transform.position = new Vector3(20, -5, 0);
+                    Xuanjiang_Cards[1].transform.position = new Vector3(20, -5, 0);
+                    Xuanjiang_Cards[2].transform.position = new Vector3(20, -5, 0);
+                    switch (msg)
+                    {
+                        case "Wujiang1":
+                            Xuanjiang_Cards[0].transform.position = new Vector3(6.5f, -3.2f, -4);
+                            GameObject.DestroyImmediate(Xuanjiang_Cards[1].gameObject);
+                            GameObject.DestroyImmediate(Xuanjiang_Cards[2].gameObject);
+                            Xuanjiang_Cards.RemoveAt(2);
+                            Xuanjiang_Cards.RemoveAt(1);
+                            break;
+                        case "Wujiang2":
+                            Xuanjiang_Cards[1].transform.position = new Vector3(6.5f, -3.2f, -4);
+                            GameObject.DestroyImmediate(Xuanjiang_Cards[0].gameObject);
+                            GameObject.DestroyImmediate(Xuanjiang_Cards[2].gameObject);
+                            Xuanjiang_Cards.RemoveAt(2);
+                            Xuanjiang_Cards.RemoveAt(0);
+                            break;
+                        case "Wujiang3":
+                            Xuanjiang_Cards[2].transform.position = new Vector3(6.5f, -3.2f, -4);
+                            GameObject.DestroyImmediate(Xuanjiang_Cards[0].gameObject);
+                            GameObject.DestroyImmediate(Xuanjiang_Cards[1].gameObject);
+                            Xuanjiang_Cards.RemoveAt(1);
+                            Xuanjiang_Cards.RemoveAt(0);
+                            break;
+                    }
+                    #endregion
 
-		}
+                    #region 电脑选择武将
+                    Diannao_Xuanjiang();
+                    #endregion
+
+                    #region 初始化游戏界面
+                    //所有text都不启用
+                    Sanguosha_Text_Player1_Panding1.SetActive(true);
+                    Sanguosha_Text_Player1_Panding2.SetActive(true);
+                    Sanguosha_Text_Player1_Zhuangbei1.SetActive(true);
+                    Sanguosha_Text_Player1_Zhuangbei2.SetActive(true);
+                    Sanguosha_Text_Player1_Shoupai.SetActive(true);
+                    Sanguosha_Text_Player2_Panding1.SetActive(true);
+                    Sanguosha_Text_Player2_Panding2.SetActive(true);
+                    Sanguosha_Text_Player2_Zhuangbei1.SetActive(true);
+                    Sanguosha_Text_Player2_Zhuangbei2.SetActive(true);
+                    Sanguosha_Text_Player2_Shoupai.SetActive(true);
+                    //所有功能button都不启用
+                    for (int i = 1; i < Sanguosha_Buttons.Length; ++i)
+                    {
+                        Sanguosha_Buttons[i].SetActive(true);
+                    }
+                    //所有image都不启用
+                    for (int i = 0; i < Tili_Max; ++i)
+                    {
+                        Sanguosha_Image_Player1_Tili[i].SetActive(true);
+                        Sanguosha_Image_Player2_Tili[i].SetActive(true);
+                    }
+                    #endregion
+
+                    game_state = Sanguosha_GameState.State_Playing;
+                }
+                break;
+                /*
+            case "Reset":
+                    //StartCoroutine()类似于开一个线程来进行这个函数
+                StartCoroutine(OnReset());
+                break;
+            case "Hit":
+                OnHitMe();
+                break;
+            case "Stop":
+                StartCoroutine(OnStop());
+                break;
+            case "Test":
+                OnTest();
+                break;
+                */
+
+        }
 	}
 }
