@@ -196,8 +196,8 @@ public class DeckStandard : CardDeck
         Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_025_Diaochan", "Diaochan", "Qun", 3, "Nv", "Lijian", "Biyue", "", ""));
         #endregion
         #region 特殊武将定义(2张)
-        Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_026_Shibingnan", "Shibingnan", "None", 4, "Nan", "", "", "", ""));
-        Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_027_Shibingnv", "Shibingnv", "None", 4, "Nv", "", "", "", ""));
+        //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_026_Shibingnan", "Shibingnan", "None", 4, "Nan", "", "", "", ""));
+        //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_027_Shibingnv", "Shibingnv", "None", 4, "Nv", "", "", "", ""));
         #endregion
         //下面这段是在21点里才会用的
         /*

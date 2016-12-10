@@ -15,15 +15,15 @@ Platform assembly: C:\cygwin\home\fuhao\GitHub\Sanguosha\三国杀_Data\Managed\
 Loading C:\cygwin\home\fuhao\GitHub\Sanguosha\三国杀_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\cygwin\home\fuhao\GitHub\Sanguosha\三国杀_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\cygwin\home\fuhao\GitHub\Sanguosha\三国杀_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.070 seconds
+- Completed reload, in  0.124 seconds
 Platform assembly: C:\cygwin\home\fuhao\GitHub\Sanguosha\三国杀_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\cygwin\home\fuhao\GitHub\Sanguosha\三国杀_Data\Managed\System.dll (this message is harmless)
-desktop: 1920x1080 59Hz; virtual: 3520x1080 at -1920,-122
+desktop: 1600x900 50Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.194136 ms
+UnloadTime: 0.783578 ms
 Atlas = Atlas1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
@@ -56,7 +56,7 @@ Xuanzewujiang
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-OnButton = Wujiang3
+OnButton = Wujiang1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
@@ -64,9 +64,17 @@ Pop Wujiang
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-����ѡ��
+Diannao Xuanjiang
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnButton = Jineng2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnButton = Jineng1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 35f4 -> priority: 1 
+  Thread -> id: 3238 -> priority: 1 
