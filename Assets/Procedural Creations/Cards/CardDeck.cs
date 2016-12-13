@@ -98,4 +98,9 @@ public class CardDeck : MonoBehaviour
         }
         return null;
     }
+
+    public int RestCards()
+    {
+        return m_cards.Count;
+    }
 }

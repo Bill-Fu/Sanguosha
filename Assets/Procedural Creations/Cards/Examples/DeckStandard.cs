@@ -228,15 +228,15 @@ public class DeckStandard : CardDeck
         defs.Add(new CardDef(Atlas, Stock, "Youxi_13_Heitao_Nanmanruqin", "Nanmanruqin", 13, "Heitao", "Youxi", "Feiyanshijinnang"));
         
         
-        defs.Add(new CardDef(Atlas, Stock, "Youxi_13_Hongtao_Wuxiekeji01", "Wuxiekeji", 13, "Hongtao", "Youxi", "Feiyanshijinnang"));
-        defs.Add(new CardDef(Atlas, Stock, "Youxi_13_Meihua_Wuxiekeji02", "Wuxiekeji", 13, "Meihua", "Youxi", "Feiyanshijinnang"));
+        //defs.Add(new CardDef(Atlas, Stock, "Youxi_13_Hongtao_Wuxiekeji01", "Wuxiekeji", 13, "Hongtao", "Youxi", "Feiyanshijinnang"));
+        //defs.Add(new CardDef(Atlas, Stock, "Youxi_13_Meihua_Wuxiekeji02", "Wuxiekeji", 13, "Meihua", "Youxi", "Feiyanshijinnang"));
         defs.Add(new CardDef(Atlas, Stock, "Youxi_01_Fangkuai_Zhugeliannu", "Zhugeliannu", 1, "Fangkuai", "Youxi", "Wuqi"));
         defs.Add(new CardDef(Atlas, Stock, "Youxi_02_Heitao_Baguazhen", "Baguazhen", 2, "Heitao", "Youxi", "Fangju"));
         
         defs.Add(new CardDef(Atlas, Stock, "Youxi_02_Meihua_Renwangdun", "Renwangdun", 2, "Meihua", "Youxi", "Fangju"));
-        defs.Add(new CardDef(Atlas, Stock, "Youxi_05_Fangkuai_Guanshifu", "Guanshifu", 5, "Fangkuai", "Youxi", "Wuqi"));
+        //defs.Add(new CardDef(Atlas, Stock, "Youxi_05_Fangkuai_Guanshifu", "Guanshifu", 5, "Fangkuai", "Youxi", "Wuqi"));
         defs.Add(new CardDef(Atlas, Stock, "Youxi_06_Heitao_Qinggangjian", "Qinggangjian", 6, "Heitao", "Youxi", "Wuqi"));
-        defs.Add(new CardDef(Atlas, Stock, "Youxi_09_Heitao_Hanbingjian", "Hanbingjian", 9, "Heitao", "Youxi", "Wuqi"));
+        //defs.Add(new CardDef(Atlas, Stock, "Youxi_09_Heitao_Hanbingjian", "Hanbingjian", 9, "Heitao", "Youxi", "Wuqi"));
         
         #endregion
 
