@@ -9,7 +9,6 @@ public class CardDefinition : MonoBehaviour
 [System.Serializable]
 public class CardDef
 {
-
 	public CardAtlas Atlas;
 	public CardStock Stock;
     //下面三个变量实际上我没用，因为用的自己的已经制作好的卡片，所以点数和花色就自己另行定义了

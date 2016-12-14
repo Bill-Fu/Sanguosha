@@ -258,7 +258,7 @@ public class DeckStandard : CardDeck
         Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_009_Guanyu", "Guanyu", "Shu", 4, "Nan", "Wusheng", "", "", ""));
         Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_010_Zhangfei", "Zhangfei", "Shu", 4, "Nan", "Paoxiao", "", "", ""));
         //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_011_Zhugeliang", "Zhugeliang", "Shu", 3, "Nan", "Guanxing", "Kongcheng", "", ""));
-        Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_012_Zhaoyun", "Zhaoyun", "Shu", 4, "Nan", "Longdan", "", "", ""));
+        //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_012_Zhaoyun", "Zhaoyun", "Shu", 4, "Nan", "Longdan", "", "", ""));
         Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_013_Machao", "Machao", "Shu", 4, "Nan", "Mashu", "Tieqi", "", ""));
         Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_014_Huangyueying", "Huangyueying", "Shu", 3, "Nv", "Jizhi", "Qicai", "", ""));
         Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_034_Huangzhong", "Huangzhong", "Shu", 4, "Nan", "Liegong", "", "", ""));
@@ -267,19 +267,23 @@ public class DeckStandard : CardDeck
         //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_037_Jiangwei", "Jiangwei", "Shu", 4, "Nan", "Tiaoxin", "", "", ""));
         #endregion
         #region 吴国武将定义(8张)
-        Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_015_Sunquan", "Sunquan", "Wu", 4, "Nan", "Zhiheng", "", "", "Jiuyuan"));
+        //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_015_Sunquan", "Sunquan", "Wu", 4, "Nan", "Zhiheng", "", "", "Jiuyuan"));
         //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_016_Ganning", "Ganning", "Wu", 4, "Nan", "Qixi", "", "", ""));
         //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_017_Lvmeng", "Lvmeng", "Wu", 4, "Nan", "Keji", "", "", ""));
         //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_018_Huanggai", "Huanggai", "Wu", 4, "Nan", "Kurou", "", "", ""));
-        Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_019_Zhouyu", "Zhouyu", "Wu", 3, "Nan", "Yingzi", "Fanjian", "", ""));
+        /*
+        //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_019_Zhouyu", "Zhouyu", "Wu", 3, "Nan", "Yingzi", "Fanjian", "", ""));
+        */
         //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_020_Daqiao", "Daqiao", "Wu", 3, "Nn", "Guose", "Liuli", "", ""));
         //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_021_Luxun", "Luxun", "Wu", 3, "Nan", "Qianxun", "Lianying", "", ""));
-        Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_022_Sunshangxiang", "Sunshangxiang", "Wu", 3, "Nv", "Jieyin", "Xiaoji", "", ""));
+        /*
+        //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_022_Sunshangxiang", "Sunshangxiang", "Wu", 3, "Nv", "Jieyin", "Xiaoji", "", ""));
+        */
         //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_030_Xiaoqiao", "Xiaoqiao", "Wu", 3, "Nv", "Tianxiang", "Hongyan", "", ""));
         #endregion
         #region 群雄武将定义(3张)
         //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_023_Huatuo", "Huatuo", "Qun", 3, "Nan", "Jijiu", "Qingnang", "", ""));
-        Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_024_Lvbu", "Lvbu", "Qun", 4, "Nan", "Wushuang", "", "", ""));
+        //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_024_Lvbu", "Lvbu", "Qun", 4, "Nan", "Wushuang", "", "", ""));
         Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_025_Diaochan", "Diaochan", "Qun", 3, "Nv", "Lijian", "Biyue", "", ""));
         //Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_028_Zhangjiao", "Zhangjiao", "Qun", 3, "Nan", "Leiji", "Guidao", "", ""));
         Wujianglist.Add(new CardDef(Atlas, Stock, "Wujiang_029_Pangde", "Pangde", "Qun", 4, "Nan", "Mashu", "Mengjin", "", ""));

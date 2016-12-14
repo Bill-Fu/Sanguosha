@@ -86,6 +86,23 @@ public class CardDeck : MonoBehaviour
 		return null;
 	}
 
+    public void RenewCard(List<Card> used)
+    {
+        foreach (Card card in used)
+        {
+            m_cards.Add(card.Definition);
+        }
+
+        foreach (Card card in used)
+        {
+            GameObject.DestroyImmediate(card.gameObject);
+        }
+
+        used.Clear();
+
+        Debug.Log("ÖØÐÂ´ÓÆúÅÆ¶ÑÏ´ÅÆ£¬Ê£ÓàÅÆÊý" + m_cards.Count.ToString());
+    }
+
     public CardDef Wujiangpop()
     {
         Debug.Log("Pop Wujiang");
